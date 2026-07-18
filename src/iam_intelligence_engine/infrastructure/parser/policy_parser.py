@@ -1,5 +1,5 @@
-from iam_intelligence_engine.domain.policy import Policy
-from iam_intelligence_engine.domain.statement import Statement
+from iam_intelligence_engine.domain.models.policy import Policy
+from iam_intelligence_engine.domain.models.statement import Statement
 
 
 class PolicyParser:

@@ -1,6 +1,6 @@
 from dataclasses import dataclass, field
 
-from iam_intelligence_engine.domain.statement import Statement
+from iam_intelligence_engine.domain.models.statement import Statement
 
 
 @dataclass(slots=True)

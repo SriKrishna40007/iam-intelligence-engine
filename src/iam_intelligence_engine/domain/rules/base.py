@@ -4,7 +4,6 @@ from iam_intelligence_engine.domain.models.finding import Finding
 from iam_intelligence_engine.domain.models.policy import Policy
 from iam_intelligence_engine.domain.models.severity import Severity
 
-
 class BaseRule(ABC):
     """Base contract for all IAM security rules."""
 
