@@ -1,0 +1,23 @@
+[project]
+name = "iam-intelligence-engine"
+version = "0.1.0"
+description = "Production-grade IAM Intelligence Engine"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "rich>=15.0.0",
+    "typer>=0.27.0",
+]
+
+[project.scripts]
+iamie = "iam_intelligence_engine.main:app"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+    "ruff>=0.15.22",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
