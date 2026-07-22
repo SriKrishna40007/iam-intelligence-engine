@@ -1,15 +1,14 @@
 import json
 from pathlib import Path
 
-from iam_intelligence_engine.domain.models.executive_summary import (
-    ExecutiveSummary,
-)
+from iam_intelligence_engine.config.constants import JSON_INDENT
+from iam_intelligence_engine.domain.models.executive_summary import ExecutiveSummary
 from iam_intelligence_engine.presentation.json_formatter import JsonFormatter
 
 
 class JsonReportWriter:
     """
-    Writes an ExecutiveSummary as a JSON report.
+    Writes an ExecutiveSummary as JSON.
     """
 
     def __init__(self) -> None:
@@ -20,7 +19,6 @@ class JsonReportWriter:
         summary: ExecutiveSummary,
         output_file: str,
     ) -> None:
-
         data = self._formatter.format(summary)
 
         path = Path(output_file)
@@ -31,5 +29,5 @@ class JsonReportWriter:
             json.dump(
                 data,
                 file,
-                indent=4,
+                indent=JSON_INDENT,
             )

@@ -1,6 +1,7 @@
 import json
 from pathlib import Path
 
+from iam_intelligence_engine.config.constants import JSON_INDENT
 from iam_intelligence_engine.domain.models.executive_summary import ExecutiveSummary
 from iam_intelligence_engine.presentation.sarif_formatter import SarifFormatter
 
@@ -25,4 +26,8 @@ class SarifReportWriter:
         path.parent.mkdir(parents=True, exist_ok=True)
 
         with path.open("w", encoding="utf-8") as file:
-            json.dump(data, file, indent=4)
+            json.dump(
+                data,
+                file,
+                indent=JSON_INDENT,
+            )

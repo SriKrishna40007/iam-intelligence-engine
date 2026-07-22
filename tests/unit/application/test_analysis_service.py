@@ -1,16 +1,17 @@
+import json
 from pathlib import Path
 
-from iam_intelligence_engine.application.analysis_service import AnalysisService
+from iam_intelligence_engine.bootstrap.container import ApplicationContainer
 
 
 def test_analysis_service_returns_summary():
-    service = AnalysisService()
+    service = ApplicationContainer.build()
 
     policy = Path("examples/administrator_access.json")
 
-    summary = service.analyze(str(policy))
+    with policy.open(encoding="utf-8") as file:
+        policy_data = json.load(file)
 
-    assert summary is not None
-    assert hasattr(summary, "overall_risk_score")
-    assert hasattr(summary, "findings")
-    assert hasattr(summary, "recommendations")
+    summary = service.analyze(policy_data)
+
+    assert summary.overall_risk_score > 0

@@ -1,9 +1,13 @@
+from iam_intelligence_engine.config.constants import (
+    SARIF_SCHEMA,
+    SARIF_VERSION,
+)
 from iam_intelligence_engine.domain.models.executive_summary import ExecutiveSummary
 
 
 class SarifFormatter:
     """
-    Converts an ExecutiveSummary into a SARIF dictionary.
+    Converts an ExecutiveSummary into a SARIF document.
     """
 
     def format(
@@ -24,15 +28,13 @@ class SarifFormatter:
             )
 
         return {
-            "version": "2.1.0",
-            "$schema": (
-                "https://json.schemastore.org/sarif-2.1.0.json"
-            ),
+            "version": SARIF_VERSION,
+            "$schema": SARIF_SCHEMA,
             "runs": [
                 {
                     "tool": {
                         "driver": {
-                            "name": "IAM Intelligence Engine",
+                            "name": summary.metadata.tool,
                             "version": summary.metadata.version,
                         }
                     },

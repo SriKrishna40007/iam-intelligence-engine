@@ -4,6 +4,8 @@ from iam_intelligence_engine.domain.models.correlation import Correlation
 from iam_intelligence_engine.domain.models.executive_summary import ExecutiveSummary
 from iam_intelligence_engine.domain.models.finding import Finding
 from iam_intelligence_engine.domain.models.report_metadata import ReportMetadata
+from iam_intelligence_engine.config.settings import APP_NAME, VERSION
+
 
 
 class ExecutiveSummaryEngine:
@@ -27,10 +29,10 @@ class ExecutiveSummaryEngine:
         )
 
         metadata = ReportMetadata(
-            tool="IAM Intelligence Engine",
-            version="0.1.0",
-            generated_at=datetime.now(UTC).isoformat(),
-        )
+        tool=APP_NAME,
+        version=VERSION,
+        generated_at=datetime.now(UTC).isoformat(),
+)
 
         return ExecutiveSummary(
             overall_risk_score=risk_score,
