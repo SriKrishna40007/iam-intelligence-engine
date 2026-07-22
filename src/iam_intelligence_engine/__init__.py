@@ -1,2 +1,3 @@
-def main() -> None:
-    print("Hello from iam-intelligence-engine!")
+from .sdk import IAMEngine
+
+__all__ = ["IAMEngine"]

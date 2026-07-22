@@ -4,6 +4,7 @@ from pathlib import Path
 import typer
 from rich.console import Console
 
+from iam_intelligence_engine.application.dto.analysis_request import AnalysisRequest
 from iam_intelligence_engine.bootstrap.container import ApplicationContainer
 from iam_intelligence_engine.config.logging import get_logger
 from iam_intelligence_engine.config.settings import (
@@ -70,9 +71,15 @@ def scan(
     with policy_file.open(encoding="utf-8") as file:
         policy_data = json.load(file)
 
+    request = AnalysisRequest(
+        policy_data=policy_data,
+    )
+
     service = ApplicationContainer.build()
 
-    summary = service.analyze(policy_data)
+    result = service.analyze(request)
+
+    summary = result.summary
 
     if output is OutputFormat.CLI:
         console.print(CLIFormatter().format(summary))

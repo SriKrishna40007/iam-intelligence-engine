@@ -1,3 +1,5 @@
+from iam_intelligence_engine.application.dto.analysis_request import AnalysisRequest
+from iam_intelligence_engine.application.dto.analysis_result import AnalysisResult
 from iam_intelligence_engine.config.logging import get_logger
 
 
@@ -25,10 +27,13 @@ class AnalysisService:
         self._risk_engine = risk_engine
         self._summary_engine = summary_engine
 
-    def analyze(self, policy_data: dict):
+    def analyze(
+        self,
+        request: AnalysisRequest,
+    ) -> AnalysisResult:
         logger.info("Parsing IAM policy")
 
-        policy = self._parser.parse(policy_data)
+        policy = self._parser.parse(request.policy_data)
 
         logger.info("Executing security rules")
 
@@ -53,4 +58,4 @@ class AnalysisService:
 
         logger.info("Analysis completed")
 
-        return summary
+        return AnalysisResult(summary=summary)
