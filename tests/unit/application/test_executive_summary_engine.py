@@ -14,3 +14,6 @@ def test_build_summary():
     assert summary.findings == []
     assert summary.correlations == []
     assert summary.recommendations == []
+    assert summary.metadata is not None
+    assert summary.metadata.tool == "IAM Intelligence Engine"
+    assert summary.metadata.version == "0.1.0"
