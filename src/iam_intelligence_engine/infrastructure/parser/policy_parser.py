@@ -16,19 +16,32 @@ class PolicyParser:
 
         for statement_data in data.get("Statement", []):
 
-            action = statement_data.get("Action", [])
-            resource = statement_data.get("Resource", [])
+            actions = statement_data.get("Action", [])
+            not_actions = statement_data.get("NotAction", [])
 
-            if isinstance(action, str):
-                action = [action]
+            resources = statement_data.get("Resource", [])
+            not_resources = statement_data.get("NotResource", [])
 
-            if isinstance(resource, str):
-                resource = [resource]
+            if isinstance(actions, str):
+                actions = [actions]
+
+            if isinstance(not_actions, str):
+                not_actions = [not_actions]
+
+            if isinstance(resources, str):
+                resources = [resources]
+
+            if isinstance(not_resources, str):
+                not_resources = [not_resources]
 
             statement = Statement(
                 effect=statement_data["Effect"],
-                actions=action,
-                resources=resource,
+                actions=actions,
+                not_actions=not_actions,
+                resources=resources,
+                not_resources=not_resources,
+                conditions=statement_data.get("Condition", {}),
+                sid=statement_data.get("Sid"),
             )
 
             statements.append(statement)
